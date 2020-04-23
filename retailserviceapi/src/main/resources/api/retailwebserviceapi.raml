@@ -1,0 +1,336 @@
+#%RAML 1.0
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/706b64b6-2f09-4ec2-ae50-7bf2d049fdb2/ # 
+title: RetailWebserviceAPI
+version: v1,1.0
+description: 
+   !include Documents/documentation.raml
+types:
+  products: !include dataTypes/products.raml
+  Bill: !include dataTypes/Bill.raml
+  ProductCategory: !include dataTypes/ProductCategory.raml
+  
+/Products:
+  get:
+    description: "Get all Procucts"
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              !include examples/products.raml
+      404:
+        body:
+          application/json:
+            example:
+              {"No_result": "The is no mutching result" }
+      500:
+        body:
+          application/json:
+            example:
+              {
+                "Server not found":"500"
+              }  
+  /{id}:
+    get:
+      description: "Get products with specific id"
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+               !include examples/products.raml
+        404:
+          body:
+            application/json:
+              example:
+                {"No_result": "The is no mutching result" }
+        500:
+          body:
+            application/json:
+              example:
+                {
+                  "Server not found":"500"
+                }  
+    put:
+      description: "Updates product data based on request JSON"
+      responses:
+        200:
+          body:
+            application/json:
+              type: products
+              example:
+                !include  examples/products.raml
+        404:
+          body:
+            application/json:
+              example:
+                {"No_result": "The is no mutching resalt" }
+        500:
+          body:
+            application/json:
+              example:
+                {
+                  "Server not found":"500"
+                }  
+    delete:
+      description: "Delete an existing product if it is notassociated with a bil"        
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                { "delete": "accessfully deleted"}  
+        404:
+          body:
+            application/json:
+              example:
+                {"No_result": "The is no mutching result" }
+        500:
+          body:
+            application/json:
+              example:
+                {
+                  "Server not found":"500"
+                }        
+  post:
+    description: "products Creates a new product based on request JSON"  
+    responses:
+      200:
+        body:
+          application/json:
+            type: products
+            example:
+              !include examples/products.raml
+      404:
+          body:
+            application/json:
+              example:
+                {"No_result": "The is no mutching result" }
+      500:
+          body:
+            application/json:
+              example:
+                {
+                  "Server not found":"500"
+                }     
+          
+/Bills:
+  get:
+    description: "get all billing information"
+    responses:
+      200:
+        body:
+          application/json:
+            type: Bill
+            example:
+              !include examples/Bill.raml
+      404:
+          body:
+            application/json:
+              example:
+                {"No_result": "The is no mutching result" }
+      500:
+          body:
+            application/json:
+              example:
+                {
+                  "Server not found":"500"
+                }  
+        
+  /{id}:
+    get:
+      description: "get billing info by id"
+      responses:
+        200:
+          body:
+            application/json:
+              type: Bill
+              example:
+                !include examples/Bill.raml
+        404:
+            body:
+              application/json:
+                example:
+                  {"No_result": "The is no mutching result" }
+        500:
+            body:
+              application/json:
+                example:
+                  {
+                    "Server not found":"500"
+                  } 
+    put:
+      description: "updates billing info"
+      responses:
+        200:
+          body:
+            application/json:
+              type: Bill
+              example:
+                !include examples/Bill.raml
+        404:
+            body:
+              application/json:
+                example:
+                  {"No_result": "The is no mutching result" }
+        500:
+            body:
+              application/json:
+                example:
+                  {
+                    "Server not found":"500"
+                  }         
+    delete:
+      description: "delete billing info from the system"
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                {"Billing info deleted"}  
+        404:
+            body:
+              application/json:
+                example:
+                  {"No_result": "The is no mutching result" }
+        500:
+            body:
+              application/json:
+                example:
+                  {
+                    "Server not found":"500"
+                  }                    
+  post:
+    description: "create bill info"  
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {"Bill": "billing info created"}
+      404:
+            body:
+              application/json:
+                example:
+                  {"No_result": "The is no mutching result" }
+      500:
+          body:
+            application/json:
+              example:
+                {
+                  "Server not found":"500"
+                }       
+        
+/ProdacutCatagory:
+  get:
+    description: "get all ProdacutCatagory"
+    responses:
+      200:
+        body:
+          application/json:
+            type: ProductCategory
+            example:
+              !include examples/ProductCategory.raml
+      404:
+            body:
+              application/json:
+                example:
+                  {"No_result": "The is no mutching result" }
+      500:
+          body:
+            application/json:
+              example:
+                {
+                  "Server not found":"500"
+                }        
+  post:
+    description: "create ProdacutCatagory"
+    responses:
+      200:
+        body:
+          application/json:
+            type: ProductCategory
+            example:
+              !include examples/ProductCategory.raml
+      404:
+            body:
+              application/json:
+                example:
+                  {"No_result": "The is no mutching result" }
+      500:
+          body:
+            application/json:
+              example:
+                {
+                  "Server not found":"500"
+                }         
+
+  /{id}:
+    get:
+      description: "get ProdacutCatagory by id"
+      responses:
+        200:
+          body:
+            application/json:
+              type: ProductCategory
+              example:
+                !include examples/ProductCategory.raml
+        404:
+            body:
+              application/json:
+                example:
+                  {"No_result": "The is no mutching result" }
+        500:
+            body:
+              application/json:
+                examples:
+                  {
+                    "Server not found":"500"
+                  }         
+    put:
+      description: "update ProdacutCatagory "
+      responses:
+        200:
+          body:
+            application/json:
+              type: ProductCategory
+              example:
+                !include examples/ProductCategory.raml
+        404:
+            body:
+              application/json:
+                example:
+                  {"No_result": "The is no mutching result" }
+        500:
+            body:
+              application/json:
+                example:
+                  {
+                    "Server not found":"500"
+                  }         
+    delete:
+      description: "delete ProdacutCatagory from the system"
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                {"ProdacutCatagory deleted"}
+        404:
+            body:
+              application/json:
+                example:
+                  {"No_result": "The is no mutching result" }
+        500:
+            body:
+              application/json:
+                example:
+                  {
+                    "Server not found":"500"
+                  }        
+
+              
+              
+      
+
+ 

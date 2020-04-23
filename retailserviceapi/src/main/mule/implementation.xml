@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="5bda9283-6d20-4e0f-bfe1-94f799c32ec1" >
+		<http:request-connection host="dev.icraftsoft.net" port="8093" />
+	</http:request-config>
+	<flow name="implementationFlow" doc:id="5aead35c-af55-40de-9a89-9556cb43e62e" >
+		<logger level="INFO" doc:name="Logger" doc:id="ae7b13c2-1093-4d27-91a0-b39b24c9df89" />
+		<http:request method="GET" doc:name="Request" doc:id="1a0f1bd8-ddd9-4292-ab2d-1fa6a1b11ac5" config-ref="HTTP_Request_configuration"/>
+		<ee:transform doc:name="Transform Message" doc:id="7631bf23-889a-4233-a00e-143ae56fb57c" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+	
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
